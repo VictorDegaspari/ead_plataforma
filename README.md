@@ -72,6 +72,6 @@ Just edit your php.ini and uncomment the lines `extension=pdo_pgsql.so` and `ext
 ## Starting
 `npm install`, `composer install`, finally `php artisan serve`.
 ## Database
-`php artisan migrate`, `php artisan passport:install`
+`php artisan migrate`, To genarete client keys -> `php artisan passport:install`
 
 
