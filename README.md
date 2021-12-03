@@ -21,10 +21,14 @@ Laravel is accessible, powerful, and provides tools required for large, robust a
 <p align="center">
     Just edit your php.ini and uncomment the lines `extension=pdo_pgsql.so` and `extension=pgsql.so`.
 </p>
+
 ## Starting
-`npm install`, `composer install`, finally `php artisan serve`.
+<p align="center">
+    `npm install`, `composer install`, finally `php artisan serve`.
+</p>
 
 ## Database
-`php artisan migrate`, To generate client keys run `php artisan passport:install`
-
+<p align="center">
+    `php artisan migrate`, To generate client keys run `php artisan passport:install`
+</p>
 
