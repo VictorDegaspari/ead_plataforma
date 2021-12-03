@@ -70,8 +70,6 @@ UBUNTU - `sudo apt-get install php5-pgsql`
 Just edit your php.ini and uncomment the lines `extension=pdo_pgsql.so` and `extension=pgsql.so`.
 
 ## Starting
-`npm install`.
-`composer install`.
-finally `php artisan serve`.
+`npm install`, `composer install`, finally `php artisan serve`.
 
 
