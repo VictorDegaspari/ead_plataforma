@@ -7,6 +7,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -24,4 +25,7 @@ Route::middleware('auth:api')->group( function () {
     Route::resource('courses', CourseController::class);
     Route::resource('categories', CategoryController::class);
     Route::resource('comments', CommentController::class);
+    Route::resource('users', UserController::class);
+    Route::get('loggedUser', [RegisterController::class, 'loggedUser']);
+
 });
