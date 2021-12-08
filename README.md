@@ -15,20 +15,18 @@ Laravel is accessible, powerful, and provides tools required for large, robust a
 </p>
 
 ## Prerequisites
-<p align="center">
-    UBUNTU - sudo apt-get install php7.4-pgsql, sudo apt-get install php-pgsql
-</p>
-<p align="center">
-    Just edit your php.ini and uncomment the lines extension=pdo_pgsql.so and extension=pgsql.so
-</p>
+
+    **UBUNTU** - `sudo apt-get install php7.4-pgsql`, `sudo apt-get install php-pgsql`.
+    Just edit your php.ini and uncomment the lines `extension=pdo_pgsql.so` and `extension=pgsql.so`.
+
 
 ## Starting
-<p align="center">
-    npm install, composer install, finally php artisan serve
-</p>
+    <p></p>
+    `npm install`, `composer install`, finally `php artisan serve`
+
 
 ## Database
-<p align="center">
-    php artisan migrate, To generate client keys run php artisan passport:install
-</p>
+    <p></p>
+    `php artisan migrate`, To generate client keys run `php artisan passport:install`
+
 
