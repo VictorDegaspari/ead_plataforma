@@ -10,24 +10,19 @@
 Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
 ## License
-<p align="center">
-    The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
 ## Prerequisites
 
-    UBUNTU - `sudo apt-get install php7.4-pgsql`, `sudo apt-get install php-pgsql`.
-    Just edit your php.ini and uncomment the lines `extension=pdo_pgsql.so` and `extension=pgsql.so`.
+- **UBUNTU**: `sudo apt-get install php7.4-pgsql`, `sudo apt-get install php-pgsql` 
+- Just edit your php.ini and uncomment the lines `extension=pdo_pgsql.so` and `extension=pgsql.so`
 
 
 ## Starting
-
-    `npm install`, 
-    `composer install`, 
-    finally `php artisan serve`
+- `npm install`, `composer install`, finally `php artisan serve`
 
 
 ## Database
-
-    `php artisan migrate`, To generate client keys run `php artisan passport:install`
+- `php artisan migrate`, To generate client keys run `php artisan passport:install`
 
 
