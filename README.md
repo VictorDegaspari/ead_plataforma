@@ -21,7 +21,9 @@ Laravel is accessible, powerful, and provides tools required for large, robust a
 
 ## Starting
 
-    `npm install`, `composer install`, finally `php artisan serve`
+    `npm install`, 
+    `composer install`, 
+    finally `php artisan serve`
 
 
 ## Database
