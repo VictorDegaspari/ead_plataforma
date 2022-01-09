@@ -17,9 +17,9 @@ class CourseController extends BaseController
      */
     public function index()
     {
-        $courses = Course::all();
+        $courses = Course::with(['users'])->paginate(15);
 
-        return $this->sendResponse(CourseResource::collection($courses), 'Courses retrieved successfully.');
+        return $this->sendResponse($courses, 'Courses retrieved successfully.');
     }
     /**
      * Store a newly created resource in storage.
@@ -41,6 +41,9 @@ class CourseController extends BaseController
         }
 
         $course = Course::create($input);
+        $userId = auth()->user()->id;
+
+        $course->users()->attach($userId);
 
         return $this->sendResponse(new CourseResource($course), 'Course created successfully.');
     }

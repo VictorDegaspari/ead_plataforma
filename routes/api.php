@@ -8,6 +8,7 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ManageCoursesController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -27,5 +28,7 @@ Route::middleware('auth:api')->group( function () {
     Route::resource('comments', CommentController::class);
     Route::resource('users', UserController::class);
     Route::get('loggedUser', [RegisterController::class, 'loggedUser']);
+    Route::post('attachCourse/{courseId}', [ManageCoursesController::class, 'attachCourse']);
+    Route::post('detachCourses/{courseId}', [ManageCoursesController::class, 'detachCourse']);
 
 });

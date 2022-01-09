@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Category;
+use App\Http\Resources\Category as CategoryResource;
+use Validator;
 
 class CategoryController extends Controller
 {
@@ -13,7 +16,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Category::paginate(15);
+
+        return $this->sendResponse($categories, 'Categories retrieved successfully.');
     }
 
     /**
@@ -24,7 +29,19 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->all();
+
+        $validator = Validator::make($input, [
+            'name' => 'required',
+        ]);
+
+        if($validator->fails()){
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
+
+        $category = Category::create($input);
+
+        return $this->sendResponse(new CategoryResource($category), 'Category created successfully.');
     }
 
     /**

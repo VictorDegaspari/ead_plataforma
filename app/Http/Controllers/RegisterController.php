@@ -61,7 +61,10 @@ class RegisterController extends BaseController
      * @return \Illuminate\Http\Response
      */
     public function loggedUser() {
-        $user = Auth::user();
+        $user = User::with([ 'courses' ])
+        ->where('id', Auth::user()->id)
+        ->first();
+
         return $this->sendResponse($user, 'User data');
     }
 
