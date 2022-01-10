@@ -23,11 +23,17 @@ Route::post('register', [RegisterController::class, 'register']);
 Route::post('login', [RegisterController::class, 'login']);
 
 Route::middleware('auth:api')->group( function () {
-    Route::resource('courses', CourseController::class);
-    Route::resource('categories', CategoryController::class);
-    Route::resource('comments', CommentController::class);
-    Route::resource('users', UserController::class);
     Route::get('loggedUser', [RegisterController::class, 'loggedUser']);
+
+    Route::resource('courses', CourseController::class);
+
+    Route::get('recommended', [CategoryController::class, 'recommended']);
+    Route::resource('categories', CategoryController::class);
+
+    Route::resource('comments', CommentController::class);
+
+    Route::resource('users', UserController::class);
+
     Route::post('attachCourse', [ManageCoursesController::class, 'attachCourse']);  //atribui curso ao usuário
     Route::post('detachCourses', [ManageCoursesController::class, 'detachCourse']); //desatribui curso ao usuário
 

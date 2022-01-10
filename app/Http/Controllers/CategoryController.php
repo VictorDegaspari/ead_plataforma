@@ -94,4 +94,10 @@ class CategoryController extends BaseController
 
         return $this->sendResponse([], 'Category deleted successfully.');
     }
+
+    public function recommended() {
+
+        $categories = Category::limit(9)->get();
+        return $this->sendResponse($categories, 'Courses retrieved successfully.');
+    }
 }
