@@ -42,7 +42,6 @@ class CourseController extends BaseController
         if($validator->fails()){
             return $this->sendError('Validation Error.', $validator->errors());
         }
-
         $course = Course::create($input);
         $userId = auth()->user()->id;
 

@@ -18,6 +18,8 @@ class Course extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'detail' => $this->detail,
+            'url' => $this->url,
+            'time' => $this->time,
             'price' => $this->price,
             'created_at' => $this->created_at->format('d/m/Y'),
             'updated_at' => $this->updated_at->format('d/m/Y'),
