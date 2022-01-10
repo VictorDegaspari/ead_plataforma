@@ -28,7 +28,7 @@ Route::middleware('auth:api')->group( function () {
     Route::resource('comments', CommentController::class);
     Route::resource('users', UserController::class);
     Route::get('loggedUser', [RegisterController::class, 'loggedUser']);
-    Route::post('attachCourse/{courseId}', [ManageCoursesController::class, 'attachCourse']);
-    Route::post('detachCourses/{courseId}', [ManageCoursesController::class, 'detachCourse']);
+    Route::post('attachCourse', [ManageCoursesController::class, 'attachCourse']);  //atribui curso ao usuário
+    Route::post('detachCourses', [ManageCoursesController::class, 'detachCourse']); //desatribui curso ao usuário
 
 });

@@ -3,20 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Course;
 
 class ManageCoursesController extends Controller
 {
 
     /**
-     * Update the specified resource in storage.
-     *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function detachCourse($courseId)
+    public function detachCourse(Request $request)
     {
-        $course = Course::find($id);
+        $course = Course::find($request['courseId']);
 
         if (is_null($course)) {
             return $this->sendError('Course not found.');
@@ -25,21 +23,24 @@ class ManageCoursesController extends Controller
         $user = auth()->user();
 
         // Detach a single course from the user...
-        $user->roles()->detach($courseId);
+        $user->courses()->detach($course->id);
 
         // Detach all courses from the user...
-        $user->roles()->detach();
+        $user->courses()->detach();
+
+        return response()->json([
+            'message' => 'Course removed from the list.',
+        ]);
+
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function attachCourse($courseId)
+    public function attachCourse(Request $request)
     {
-        $course = Course::find($id);
+        $course = Course::find($request['courseId']);
 
         if (is_null($course)) {
             return $this->sendError('Course not found.');
@@ -48,7 +49,10 @@ class ManageCoursesController extends Controller
         $user = auth()->user();
 
         // attach a single course from the user...
-        $user->courses()->attach($courseId);
+        $user->courses()->attach($course->id);
 
+        return response()->json([
+            'message' => 'Course added to the list.',
+        ]);
     }
 }
