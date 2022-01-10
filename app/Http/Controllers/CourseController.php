@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\BaseController as BaseController;
 use App\Models\Course;
+use App\Models\Category;
 use Validator;
 use App\Http\Resources\Course as CourseResource;
 
@@ -17,7 +18,7 @@ class CourseController extends BaseController
      */
     public function index()
     {
-        $courses = Course::with(['users'])->paginate(15);
+        $courses = Course::with([ 'users', 'categories' ])->paginate(15);
 
         return $this->sendResponse($courses, 'Courses retrieved successfully.');
     }
@@ -43,7 +44,8 @@ class CourseController extends BaseController
         $course = Course::create($input);
         $userId = auth()->user()->id;
 
-        $course->users()->attach($userId);
+        $course->users()->attach($userId, [ 'admin' => true ]);
+        $course->categories()->attach($request[ 'courseId' ]);
 
         return $this->sendResponse(new CourseResource($course), 'Course created successfully.');
     }
@@ -56,13 +58,15 @@ class CourseController extends BaseController
      */
     public function show($id)
     {
-        $course = Course::find($id);
+        $course = Course::with([ 'categories' ])
+        ->where('id', $id)
+        ->first();
 
         if (is_null($course)) {
             return $this->sendError('Course not found.');
         }
 
-        return $this->sendResponse(new CourseResource($course), 'Course retrieved successfully.');
+        return $this->sendResponse($course, 'Course retrieved successfully.');
     }
 
     /**
@@ -76,20 +80,19 @@ class CourseController extends BaseController
     {
         $input = $request->all();
 
-        $validator = Validator::make($input, [
-            'name' => 'required',
-            'detail' => 'required'
-        ]);
+        $category = Category::find($request[ 'categoryId' ]);
 
-        if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors());
+        if (is_null($category) && !empty($input[ 'categoryId' ]) ) {
+            return $this->sendError('Category not found.');
         }
+        $course->categories()->attach($category->id);
 
-        $course->name = $input['name'];
-        $course->detail = $input['detail'];
+        if (!empty($input[ 'detail' ]) ) $course->detail = $input['detail'];
+        if (!empty($input[ 'name' ]) ) $course->name = $input['name'];
+
         $course->save();
 
-        return $this->sendResponse(new CourseResource($course), 'Course updated successfully.');
+        return $this->sendResponse($course, 'Course updated successfully.');
     }
 
     /**

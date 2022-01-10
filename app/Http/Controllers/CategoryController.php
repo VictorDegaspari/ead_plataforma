@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Http\Controllers\BaseController as BaseController;
 use App\Http\Resources\Category as CategoryResource;
 use Validator;
 
-class CategoryController extends Controller
+class CategoryController extends BaseController
 {
     /**
      * Display a listing of the resource.
@@ -38,7 +39,6 @@ class CategoryController extends Controller
         if($validator->fails()){
             return $this->sendError('Validation Error.', $validator->errors());
         }
-
         $category = Category::create($input);
 
         return $this->sendResponse(new CategoryResource($category), 'Category created successfully.');
@@ -52,7 +52,13 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        //
+        $category = Category::find($id);
+
+        if (is_null($category)) {
+            return $this->sendError('Category not found.');
+        }
+
+        return $this->sendResponse(new CategoryResource($category), 'Category retrieved successfully.');
     }
 
     /**
@@ -62,9 +68,22 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Category $category)
     {
-        //
+        $input = $request->all();
+
+        $validator = Validator::make($input, [
+            'name' => 'required'
+        ]);
+
+        if($validator->fails()){
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
+
+        $category->name = $input['name'];
+        $category->save();
+
+        return $this->sendResponse(new CategoryResource($category), 'Category updated successfully.');
     }
 
     /**
@@ -73,8 +92,10 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Category $category)
     {
-        //
+        $category->delete();
+
+        return $this->sendResponse([], 'Category deleted successfully.');
     }
 }

@@ -15,6 +15,6 @@ class Category extends Model
 
     public function courses()
     {
-        return $this->belongsToMany(Course::class);
+        return $this->belongsToMany(Course::class, 'categories_courses', 'categories_id', 'courses_id');
     }
 }
