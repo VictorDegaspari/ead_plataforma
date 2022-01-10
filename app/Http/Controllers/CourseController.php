@@ -90,9 +90,9 @@ class CourseController extends BaseController
 
         if (!empty($input[ 'detail' ]) ) $course->detail = $input['detail'];
         if (!empty($input[ 'name' ]) ) $course->name = $input['name'];
-        if (!empty($input[ 'time' ]) ) $course->name = $input['time'];
+        if (!empty($input[ 'time' ]) ) $course->time = $input['time'];
         if (!empty($input[ 'url' ]) ) $course->url = $input['url'];
-        if (!empty($input[ 'price' ]) ) $course->url = $input['price'];
+        if (!empty($input[ 'price' ]) ) $course->price = $input['price'];
 
         $course->save();
 
@@ -111,4 +111,5 @@ class CourseController extends BaseController
 
         return $this->sendResponse([], 'Course deleted successfully.');
     }
+
 }
