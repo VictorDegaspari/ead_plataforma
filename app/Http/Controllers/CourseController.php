@@ -34,7 +34,9 @@ class CourseController extends BaseController
 
         $validator = Validator::make($input, [
             'name' => 'required',
-            'detail' => 'required'
+            'detail' => 'required',
+            'url' => 'required',
+            'time' => 'required',
         ]);
 
         if($validator->fails()){
@@ -89,6 +91,9 @@ class CourseController extends BaseController
 
         if (!empty($input[ 'detail' ]) ) $course->detail = $input['detail'];
         if (!empty($input[ 'name' ]) ) $course->name = $input['name'];
+        if (!empty($input[ 'time' ]) ) $course->name = $input['time'];
+        if (!empty($input[ 'url' ]) ) $course->url = $input['url'];
+        if (!empty($input[ 'price' ]) ) $course->url = $input['price'];
 
         $course->save();
 

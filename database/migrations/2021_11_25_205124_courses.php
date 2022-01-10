@@ -17,6 +17,8 @@ class Courses extends Migration
             $table->id();
             $table->string('name');
             $table->text('detail');
+            $table->string('url');
+            $table->string('time');
             $table->integer('price')->default(0);
             $table->timestamps();
         });
