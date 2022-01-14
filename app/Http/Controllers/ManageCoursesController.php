@@ -22,14 +22,10 @@ class ManageCoursesController extends Controller
 
         $user = auth()->user();
 
-        // Detach a single course from the user...
-        $user->courses()->detach($course->id);
-
-        // Detach all courses from the user...
-        $user->courses()->detach();
+        $request['all'] ? $user->courses()->detach() : $user->courses()->detach($course->id);
 
         return response()->json([
-            'message' => 'Course removed from the list.',
+            'message' => 'Course(s) removed from the list.',
         ]);
 
     }
