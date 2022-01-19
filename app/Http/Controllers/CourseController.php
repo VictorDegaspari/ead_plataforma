@@ -18,7 +18,12 @@ class CourseController extends BaseController
      */
     public function index()
     {
-        $courses = Course::with([ 'users', 'categories' ])->paginate(15);
+        $courses = Course::with([
+            'users' => function ($user) {
+                $user->where('id', '=', auth()->user()->id);
+            },
+            'categories'
+        ])->paginate(15);
 
         return $this->sendResponse($courses, 'Courses retrieved successfully.');
     }
@@ -46,7 +51,7 @@ class CourseController extends BaseController
         $userId = auth()->user()->id;
 
         $course->users()->attach($userId, [ 'admin' => true ]);
-        $course->categories()->attach($request[ 'courseId' ]);
+        $course->categories()->attach($request[ 'categoryId' ]);
 
         return $this->sendResponse(new CourseResource($course), 'Course created successfully.');
     }

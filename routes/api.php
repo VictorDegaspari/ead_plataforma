@@ -34,7 +34,6 @@ Route::middleware('auth:api')->group( function () {
 
     Route::resource('users', UserController::class);
 
-    Route::post('attachCourse', [ManageCoursesController::class, 'attachCourse']);  //atribui curso ao usuário
-    Route::post('detachCourses', [ManageCoursesController::class, 'detachCourse']); //desatribui curso ao usuário
+    Route::post('attachCourse', [ManageCoursesController::class, 'attachCourse']);  // atribui ou desatribui curso ao usuário
 
 });
