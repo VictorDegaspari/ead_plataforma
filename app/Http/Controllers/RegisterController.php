@@ -62,7 +62,7 @@ class RegisterController extends BaseController
      */
     public function loggedUser() {
         $user = User::with([ 'courses' ])
-        ->where('id', Auth::user()->id)
+        ->where('id', auth()->user()->id)
         ->first();
 
         return $this->sendResponse($user, 'User data');
